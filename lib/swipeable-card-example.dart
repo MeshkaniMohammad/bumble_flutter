@@ -11,37 +11,47 @@ List<CardContents> CARDS = [
     ..age = "22"
     ..imageUrl =
         "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1534&q=80"
-    ..description = "Looking for nothing serious, Just my future husband!",
+    ..description = "Looking for nothing serious, Just my future husband!"
+    ..location = "Silicon valley, California \n ~ 32 km away",
   CardContents()
     ..name = "Jasmin"
     ..age = "26"
     ..imageUrl =
         "https://images.unsplash.com/photo-1504703395950-b89145a5425b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1302&q=80"
-    ..description = "Way better than Apples",
+    ..description = "Looking for nothing serious, Just my future husband!"
+    ..location = "Silicon valley, California \n ~ 12 km away",
   CardContents()
     ..name = "Amir"
     ..age = "34"
     ..imageUrl =
         "https://images.unsplash.com/photo-1496345875659-11f7dd282d1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
-    ..description = "Way better than Apples",
+    ..description =
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
+    ..location = "Silicon valley, California \n ~ 67 km away",
   CardContents()
     ..name = "Dan"
     ..age = "24"
     ..imageUrl =
         "https://images.unsplash.com/photo-1488161628813-04466f872be2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=80"
-    ..description = "Way better than Apples",
+    ..description =
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
+    ..location = "Silicon valley, California \n ~ 21 km away",
   CardContents()
     ..name = "John"
     ..age = "31"
     ..imageUrl =
         "https://images.unsplash.com/photo-1492446845049-9c50cc313f00?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1534&q=80"
-    ..description = "Way better than Apples",
+    ..description =
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
+    ..location = "Silicon valley, California \n ~ 10 km away",
   CardContents()
     ..name = "Parmin"
     ..age = "21"
     ..imageUrl =
         "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1534&q=80"
-    ..description = "Way better than Apples",
+    ..description =
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
+    ..location = "Silicon valley, California \n ~ 31 km away",
 ];
 
 class SwipeableCardExample extends StatefulWidget {
@@ -123,47 +133,85 @@ class _SwipeableCardExampleState extends State<SwipeableCardExample> {
                   ),
                 ],
               ),
-              Text(contents.description)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                child: Text(
+                  contents.description,
+                  style: GoogleFonts.montserrat(fontSize: 20, color: Colors.black54),
+                ),
+              ),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Container(
+                    child: Icon(
+                      CupertinoIcons.location_solid,
+                      color: Colors.white,
+                      size: 12,
+                    ),
+                    width: 20,
+                    height: 20,
+                    decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.black54),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    "${contents.name}\'s location",
+                    style: GoogleFonts.montserrat(fontSize: 17, color: Colors.black54),
+                  )
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                child: Text(contents.location,
+                    style: GoogleFonts.montserrat(fontSize: 20, color: Colors.black54)),
+              ),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Container(
+                    child: Icon(
+                      Icons.close_rounded,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                    width: 70,
+                    height: 70,
+                    decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.amberAccent),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    "Block & Report",
+                    style: GoogleFonts.montserrat(
+                        fontSize: 22, color: Colors.amber, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Container(
+                    child: Icon(
+                      Icons.check,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                    width: 70,
+                    height: 70,
+                    decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.amberAccent),
+                  ),
+                  SizedBox(
+                    width: 15,
+                  ),
+                ],
+              )
             ],
           ),
-          // Column(
-          //   crossAxisAlignment: CrossAxisAlignment.start,
-          //   children: [
-          //     Image.network(contents.imageUrl,
-          //         height: constraints.maxWidth, width: constraints.maxWidth, fit: BoxFit.cover),
-          //     Padding(
-          //       padding: const EdgeInsets.fromLTRB(5, 8.0, 5, 8.0),
-          //       child: RichText(
-          //         text: TextSpan(style: DefaultTextStyle.of(context).style, children: [
-          //           TextSpan(
-          //               text: contents.name,
-          //               style: GoogleFonts.montserrat(fontSize: 30, fontWeight: FontWeight.w500)),
-          //           TextSpan(text: ", ${contents.age}", style: GoogleFonts.montserrat(fontSize: 30))
-          //         ]),
-          //         textAlign: TextAlign.left,
-          //       ),
-          //     ),
-          //   ],
-          // ),
-          // Column(
-          //   crossAxisAlignment: CrossAxisAlignment.start,
-          //   children: [
-          //     Image.network(contents.imageUrl,
-          //         height: constraints.maxWidth, width: constraints.maxWidth, fit: BoxFit.cover),
-          //     Padding(
-          //       padding: const EdgeInsets.fromLTRB(5, 8.0, 5, 8.0),
-          //       child: RichText(
-          //         text: TextSpan(style: DefaultTextStyle.of(context).style, children: [
-          //           TextSpan(
-          //               text: contents.name,
-          //               style: GoogleFonts.montserrat(fontSize: 30, fontWeight: FontWeight.w500)),
-          //           TextSpan(text: ", ${contents.age}", style: GoogleFonts.montserrat(fontSize: 30))
-          //         ]),
-          //         textAlign: TextAlign.left,
-          //       ),
-          //     ),
-          //   ],
-          // ),
         ],
       );
     });

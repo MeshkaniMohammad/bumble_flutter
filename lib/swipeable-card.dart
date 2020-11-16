@@ -11,6 +11,7 @@ class CardContents {
   String name;
   String description;
   String age;
+  String location;
 }
 
 class SwappableCard extends StatefulWidget {
@@ -105,7 +106,6 @@ class _SwappableCardState extends State<SwappableCard> with SingleTickerProvider
                   Offset dragOffset =
                       swipeController.dragUpdateOffset - swipeController.dragStartOffset;
                   if (_hasEscapeVelocity(details, dragOffset)) {
-                    // if user drags fast enough, simulate with friction simulation
                     FrictionSimulation frictionSim = FrictionSimulation(1.1,
                         cardAnimationController.value, details.velocity.pixelsPerSecond.distance,
                         tolerance: Tolerance(distance: 1, velocity: 1));
@@ -129,6 +129,7 @@ class _SwappableCardState extends State<SwappableCard> with SingleTickerProvider
                 },
                 child: Container(
                   child: Card(
+                    color: Color(0XFFf4eed9),
                     clipBehavior: Clip.hardEdge,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
