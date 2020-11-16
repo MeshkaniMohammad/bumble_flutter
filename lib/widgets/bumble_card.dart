@@ -1,33 +1,23 @@
 import 'dart:math';
 
-import 'package:bumble_flutter/swipe_controller.dart';
+import 'package:bumble_flutter/providers/swipe_controller.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 import 'package:provider/provider.dart';
 
-class CardContents {
-  String imageUrl;
-  String name;
-  String description;
-  String age;
-  String location;
-}
-
-class SwappableCard extends StatefulWidget {
+class BumbleCard extends StatefulWidget {
   final Widget child;
   final Function onDragStart;
   final Function onCardOffscreen;
 
-  SwappableCard({Key key, this.child, this.onDragStart, this.onCardOffscreen})
-      : super(key: key);
+  BumbleCard({Key key, this.child, this.onDragStart, this.onCardOffscreen}) : super(key: key);
 
   @override
-  _SwappableCardState createState() => _SwappableCardState();
+  _BumbleCardState createState() => _BumbleCardState();
 }
 
-class _SwappableCardState extends State<SwappableCard>
-    with SingleTickerProviderStateMixin {
+class _BumbleCardState extends State<BumbleCard> with SingleTickerProviderStateMixin {
   AnimationController cardAnimationController;
   SwipeController swipeController;
   Animation beginTween;
@@ -43,19 +33,17 @@ class _SwappableCardState extends State<SwappableCard>
   void initState() {
     super.initState();
     cardAnimationController = AnimationController.unbounded(vsync: this);
-    beginTween =
-        Tween(begin: -pi / 14, end: (-pi) / 15).animate(cardAnimationController)
-          ..addListener(() {
-            setState(() {});
-          });
+    beginTween = Tween(begin: -pi / 14, end: (-pi) / 15).animate(cardAnimationController)
+      ..addListener(() {
+        setState(() {});
+      });
   }
 
   void _handleNextCardStatusListener() {
     Size screenSize = MediaQuery.of(context).size;
-    Offset cardOffset = Offset.fromDirection(
-        swipeController.direction, cardAnimationController.value);
-    if (cardOffset.dx.abs() > screenSize.width ||
-        cardOffset.dy.abs() > screenSize.width) {
+    Offset cardOffset =
+        Offset.fromDirection(swipeController.direction, cardAnimationController.value);
+    if (cardOffset.dx.abs() > screenSize.width || cardOffset.dy.abs() > screenSize.width) {
       cardAnimationController.stop();
       cardAnimationController.removeListener(_handleNextCardStatusListener);
       widget.onCardOffscreen();
@@ -64,8 +52,7 @@ class _SwappableCardState extends State<SwappableCard>
 
   bool _hasEscapeVelocity(DragEndDetails dragDetails, Offset dragOffset) {
     Size screenSize = MediaQuery.of(context).size;
-    return dragOffset.distance.abs() +
-                dragDetails.velocity.pixelsPerSecond.distance.abs() >
+    return dragOffset.distance.abs() + dragDetails.velocity.pixelsPerSecond.distance.abs() >
             screenSize.width / 2 &&
         dragDetails.velocity.pixelsPerSecond.distance > 300;
   }
@@ -101,27 +88,23 @@ class _SwappableCardState extends State<SwappableCard>
                     _angle = (-pi / 40);
                   else
                     _angle = 0.0;
-                  swipeController.dragUpdateOffset = Offset(
-                      details.globalPosition.dx,
-                      swipeController.dragStartOffset.dy);
-                  Offset dragOffset = swipeController.dragUpdateOffset -
-                      swipeController.dragStartOffset;
+                  swipeController.dragUpdateOffset =
+                      Offset(details.globalPosition.dx, swipeController.dragStartOffset.dy);
+                  Offset dragOffset =
+                      swipeController.dragUpdateOffset - swipeController.dragStartOffset;
                   cardAnimationController.value = dragOffset.distance;
                   swipeController.direction = dragOffset.direction;
                 },
                 onHorizontalDragEnd: (DragEndDetails details) {
                   _angle = 0.0;
-                  Offset dragOffset = swipeController.dragUpdateOffset -
-                      swipeController.dragStartOffset;
+                  Offset dragOffset =
+                      swipeController.dragUpdateOffset - swipeController.dragStartOffset;
                   if (_hasEscapeVelocity(details, dragOffset)) {
-                    FrictionSimulation frictionSim = FrictionSimulation(
-                        1.1,
-                        cardAnimationController.value,
-                        details.velocity.pixelsPerSecond.distance,
+                    FrictionSimulation frictionSim = FrictionSimulation(1.1,
+                        cardAnimationController.value, details.velocity.pixelsPerSecond.distance,
                         tolerance: Tolerance(distance: 1, velocity: 1));
                     cardAnimationController.animateWith(frictionSim);
-                    cardAnimationController
-                        .addListener(_handleNextCardStatusListener);
+                    cardAnimationController.addListener(_handleNextCardStatusListener);
                   } else {
                     // if user doesn't, simulate with spring simulation
 

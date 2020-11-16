@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:bumble_flutter/swipe_controller.dart';
+import 'package:bumble_flutter/providers/swipe_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -117,8 +117,7 @@ class _ActionCirclesState extends State<ActionCircles> {
     //calculate and limit offset to middle of screen
     _offset = max(
       min(
-        swipeController.dragStartOffset.dx -
-            swipeController.dragUpdateOffset.dx,
+        swipeController.dragStartOffset.dx - swipeController.dragUpdateOffset.dx,
         plusExact,
       ),
       minusExact,
