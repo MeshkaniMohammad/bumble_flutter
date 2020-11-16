@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.grey,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      debugShowCheckedModeBanner: false,
       home: MyHomePage(title: 'bumble'),
     );
   }
@@ -55,7 +56,9 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(
           widget.title,
           style: GoogleFonts.montserrat(
-              fontSize: 30, color: Colors.amberAccent, fontWeight: FontWeight.w600),
+              fontSize: 30,
+              color: Colors.amberAccent,
+              fontWeight: FontWeight.w600),
         ),
         centerTitle: true,
       ),
@@ -93,7 +96,8 @@ class BottomNavigationIcon extends StatelessWidget {
   final IconData iconData;
   final Color color;
 
-  const BottomNavigationIcon({Key key, this.iconData, this.color}) : super(key: key);
+  const BottomNavigationIcon({Key key, this.iconData, this.color})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Column(
