@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:bumble_flutter/action_circles.dart';
 import 'package:bumble_flutter/swipe_controller.dart';
 import 'package:bumble_flutter/swipeable-card-example.dart';
 import 'package:flutter/cupertino.dart';
@@ -70,26 +71,28 @@ class _MyHomePageState extends State<MyHomePage> {
         body: Stack(
           children: [
             Align(
-                alignment: Alignment.bottomCenter,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    BottomNavigationIcon(
-                      color: Colors.black12,
-                      iconData: CupertinoIcons.person_fill,
-                    ),
-                    BottomNavigationIcon(
-                      iconData: CupertinoIcons.text_aligncenter,
-                      color: Colors.black87,
-                    ),
-                    BottomNavigationIcon(
-                      color: Colors.black12,
-                      iconData: CupertinoIcons.chat_bubble_fill,
-                    ),
-                  ],
-                )),
+              alignment: Alignment.bottomCenter,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  BottomNavigationIcon(
+                    color: Colors.black12,
+                    iconData: CupertinoIcons.person_fill,
+                  ),
+                  BottomNavigationIcon(
+                    iconData: CupertinoIcons.text_aligncenter,
+                    color: Colors.black87,
+                  ),
+                  BottomNavigationIcon(
+                    color: Colors.black12,
+                    iconData: CupertinoIcons.chat_bubble_fill,
+                  ),
+                ],
+              ),
+            ),
             SwipeableCardExample(),
+            ActionCircles(),
           ],
         ),
       ),
