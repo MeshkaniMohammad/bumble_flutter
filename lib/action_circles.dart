@@ -12,8 +12,8 @@ class ActionCircles extends StatefulWidget {
 class _ActionCirclesState extends State<ActionCircles> {
   SwipeController swipeController;
   final double _minWidth = 50;
-  double _middle;
   double _scale = 0;
+  double _opacity = 0;
   double _screenWidth;
   double _offset = 0;
 
@@ -36,7 +36,7 @@ class _ActionCirclesState extends State<ActionCircles> {
             child: Container(
               width: _minWidth + _scale,
               decoration: new BoxDecoration(
-                color: Colors.green,
+                color: Colors.white.withOpacity(0.5 + _opacity),
                 shape: BoxShape.circle,
               ),
             ),
@@ -46,7 +46,7 @@ class _ActionCirclesState extends State<ActionCircles> {
             child: Container(
               width: _minWidth + _scale,
               decoration: new BoxDecoration(
-                color: Colors.red,
+                color: Colors.white.withOpacity(0.5 + _opacity),
                 shape: BoxShape.circle,
               ),
             ),
@@ -60,20 +60,34 @@ class _ActionCirclesState extends State<ActionCircles> {
     if (swipeController.dragState != DragState.UPDATE) {
       _offset = 0;
       _scale = 0;
+      _opacity = 0;
       return;
     }
+
+    double plusExact = _screenWidth / 2;
+    double minusExact = -_screenWidth / 2 - _minWidth;
 
     //calculate and limit offset to middle of screen
     _offset = max(
       min(
         swipeController.dragStartOffset.dx -
             swipeController.dragUpdateOffset.dx,
-        _screenWidth / 2,
+        plusExact,
       ),
-      -_screenWidth / 2 - _minWidth,
+      minusExact,
     );
 
+    //calculate percent
+    double percent;
+    if (_offset < 0)
+      percent = (_offset / minusExact).abs();
+    else
+      percent = (_offset / plusExact).abs();
+
     //calculate scale
-    _scale = _offset.abs() / 3;
+    _scale = percent * 80;
+
+    //calculate opacity
+    _opacity = min(percent * 0.85, 0.5);
   }
 }
