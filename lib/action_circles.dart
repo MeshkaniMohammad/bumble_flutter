@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:bumble_flutter/swipe_controller.dart';
@@ -16,6 +17,7 @@ class _ActionCirclesState extends State<ActionCircles> {
   double _opacity = 0;
   double _screenWidth;
   double _offset = 0;
+  Timer timer;
 
   @override
   void didChangeDependencies() {
@@ -54,7 +56,8 @@ class _ActionCirclesState extends State<ActionCircles> {
     @required Color color,
     @required IconData icon,
   }) {
-    return Container(
+    return AnimatedContainer(
+      duration: Duration(milliseconds: 1),
       width: _minWidth + _scale,
       decoration: new BoxDecoration(
         color: Colors.white.withOpacity(0.5 + _opacity),
@@ -77,10 +80,34 @@ class _ActionCirclesState extends State<ActionCircles> {
   }
 
   void calculateOffset() {
-    if (swipeController.dragState != DragState.UPDATE) {
+    if (swipeController.dragState == DragState.START) {
+      timer?.cancel();
       _offset = 0;
       _scale = 0;
       _opacity = 0;
+      return;
+    }
+
+    if (swipeController.dragState == DragState.END) {
+      timer = new Timer.periodic(
+        Duration(milliseconds: 3),
+        (Timer timer) => setState(
+          () {
+            if (_offset < 1 && _offset > -1) {
+              timer.cancel();
+              _opacity = 0;
+              _offset = 0;
+            } else {
+              if (_offset > 0)
+                _offset -= 1;
+              else
+                _offset += 1;
+              _scale = max(_scale - 1, 0);
+            }
+          },
+        ),
+      );
+
       return;
     }
 
