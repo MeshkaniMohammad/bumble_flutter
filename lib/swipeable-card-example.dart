@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,38 +7,40 @@ import 'swipeable-card.dart';
 
 List<CardContents> CARDS = [
   CardContents()
-    ..name = "Mr. Oinks"
-    ..age = "5w"
+    ..name = "Nilofar"
+    ..age = "22"
     ..imageUrl =
-        "https://static.boredpanda.com/blog/wp-content/uuuploads/cute-baby-animals/cute-baby-animals-10.jpg"
+        "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1534&q=80"
     ..fruitDescription = "Way better than Apples",
   CardContents()
-    ..name = "Earboy"
-    ..age = "1m"
+    ..name = "Jasmin"
+    ..age = "26"
     ..imageUrl =
-        "https://wl-brightside.cf.tsp.li/resize/728x/jpg/637/974/b84c0e573e91d52ded84291c09.jpg"
+        "https://images.unsplash.com/photo-1504703395950-b89145a5425b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1302&q=80"
     ..fruitDescription = "Way better than Apples",
   CardContents()
-    ..name = "Sneak Bear"
-    ..age = "1y"
-    ..imageUrl = "https://i.pinimg.com/736x/33/32/6d/33326dcddbf15c56d631e374b62338dc.jpg"
-    ..fruitDescription = "Way better than Apples",
-  CardContents()
-    ..name = "Q-Tip"
-    ..age = "5m"
+    ..name = "Amir"
+    ..age = "34"
     ..imageUrl =
-        "https://www.warrenphotographic.co.uk/photography/bigs/11717-Cute-Bichon-Frise-puppy-on-grey-background.jpg"
+        "https://images.unsplash.com/photo-1496345875659-11f7dd282d1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
     ..fruitDescription = "Way better than Apples",
   CardContents()
-    ..name = "No Feet"
-    ..age = "25y"
+    ..name = "Dan"
+    ..age = "24"
     ..imageUrl =
-        "https://www.treehugger.com/thmb/TcZhbna7HLnadU56fgnzIqV2GGs=/644x398/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__mnn__images__2014__06__baby-snake-e26c5896b48d4433b42b74228be3a127.jpg"
+        "https://images.unsplash.com/photo-1488161628813-04466f872be2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=80"
     ..fruitDescription = "Way better than Apples",
   CardContents()
-    ..name = "Bubbles"
-    ..age = "2y"
-    ..imageUrl = "https://www.mypetsname.com/wp-content/uploads/2019/07/Funny-Fish-Face.jpg"
+    ..name = "John"
+    ..age = "31"
+    ..imageUrl =
+        "https://images.unsplash.com/photo-1492446845049-9c50cc313f00?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1534&q=80"
+    ..fruitDescription = "Way better than Apples",
+  CardContents()
+    ..name = "Parmin"
+    ..age = "21"
+    ..imageUrl =
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1534&q=80"
     ..fruitDescription = "Way better than Apples",
 ];
 
@@ -50,15 +53,19 @@ class SwipeableCardExample extends StatefulWidget {
 
 class _SwipeableCardExampleState extends State<SwipeableCardExample> {
   List<int> cards = [2, 1];
-
+  ScrollController _scrollController;
   @override
   void initState() {
+    _scrollController = ScrollController();
     super.initState();
   }
 
   Widget _getCardContents(CardContents contents) {
     return LayoutBuilder(builder: (context, constraints) {
       return ListView(
+        addRepaintBoundaries: false,
+        controller: _scrollController,
+        physics: ClampingScrollPhysics(),
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,7 +73,7 @@ class _SwipeableCardExampleState extends State<SwipeableCardExample> {
               Image.network(contents.imageUrl,
                   height: constraints.maxWidth, width: constraints.maxWidth, fit: BoxFit.cover),
               Padding(
-                padding: const EdgeInsets.fromLTRB(16, 8.0, 16, 8.0),
+                padding: const EdgeInsets.fromLTRB(5, 8.0, 5, 8.0),
                 child: RichText(
                   text: TextSpan(style: DefaultTextStyle.of(context).style, children: [
                     TextSpan(
@@ -85,7 +92,7 @@ class _SwipeableCardExampleState extends State<SwipeableCardExample> {
               Image.network(contents.imageUrl,
                   height: constraints.maxWidth, width: constraints.maxWidth, fit: BoxFit.cover),
               Padding(
-                padding: const EdgeInsets.fromLTRB(16, 8.0, 16, 8.0),
+                padding: const EdgeInsets.fromLTRB(5, 8.0, 5, 8.0),
                 child: RichText(
                   text: TextSpan(style: DefaultTextStyle.of(context).style, children: [
                     TextSpan(
@@ -104,7 +111,7 @@ class _SwipeableCardExampleState extends State<SwipeableCardExample> {
               Image.network(contents.imageUrl,
                   height: constraints.maxWidth, width: constraints.maxWidth, fit: BoxFit.cover),
               Padding(
-                padding: const EdgeInsets.fromLTRB(16, 8.0, 16, 8.0),
+                padding: const EdgeInsets.fromLTRB(5, 8.0, 5, 8.0),
                 child: RichText(
                   text: TextSpan(style: DefaultTextStyle.of(context).style, children: [
                     TextSpan(
@@ -148,6 +155,8 @@ class _SwipeableCardExampleState extends State<SwipeableCardExample> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: MediaQuery.of(context).size.height * 0.78,
+      width: MediaQuery.of(context).size.width,
       child: Stack(
           children: cards
               .map((int x) => SwipeableCard(
