@@ -54,6 +54,7 @@ class SwipeableCardExample extends StatefulWidget {
 class _SwipeableCardExampleState extends State<SwipeableCardExample> {
   List<int> cards = [2, 1];
   ScrollController _scrollController;
+
   @override
   void initState() {
     _scrollController = ScrollController();
@@ -71,16 +72,23 @@ class _SwipeableCardExampleState extends State<SwipeableCardExample> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Image.network(contents.imageUrl,
-                  height: constraints.maxWidth, width: constraints.maxWidth, fit: BoxFit.cover),
+                  height: constraints.maxWidth,
+                  width: constraints.maxWidth,
+                  fit: BoxFit.cover),
               Padding(
                 padding: const EdgeInsets.fromLTRB(5, 8.0, 5, 8.0),
                 child: RichText(
-                  text: TextSpan(style: DefaultTextStyle.of(context).style, children: [
-                    TextSpan(
-                        text: contents.name,
-                        style: GoogleFonts.montserrat(fontSize: 30, fontWeight: FontWeight.w500)),
-                    TextSpan(text: ", ${contents.age}", style: GoogleFonts.montserrat(fontSize: 30))
-                  ]),
+                  text: TextSpan(
+                      style: DefaultTextStyle.of(context).style,
+                      children: [
+                        TextSpan(
+                            text: contents.name,
+                            style: GoogleFonts.montserrat(
+                                fontSize: 30, fontWeight: FontWeight.w500)),
+                        TextSpan(
+                            text: ", ${contents.age}",
+                            style: GoogleFonts.montserrat(fontSize: 30))
+                      ]),
                   textAlign: TextAlign.left,
                 ),
               ),
@@ -90,16 +98,23 @@ class _SwipeableCardExampleState extends State<SwipeableCardExample> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Image.network(contents.imageUrl,
-                  height: constraints.maxWidth, width: constraints.maxWidth, fit: BoxFit.cover),
+                  height: constraints.maxWidth,
+                  width: constraints.maxWidth,
+                  fit: BoxFit.cover),
               Padding(
                 padding: const EdgeInsets.fromLTRB(5, 8.0, 5, 8.0),
                 child: RichText(
-                  text: TextSpan(style: DefaultTextStyle.of(context).style, children: [
-                    TextSpan(
-                        text: contents.name,
-                        style: GoogleFonts.montserrat(fontSize: 30, fontWeight: FontWeight.w500)),
-                    TextSpan(text: ", ${contents.age}", style: GoogleFonts.montserrat(fontSize: 30))
-                  ]),
+                  text: TextSpan(
+                      style: DefaultTextStyle.of(context).style,
+                      children: [
+                        TextSpan(
+                            text: contents.name,
+                            style: GoogleFonts.montserrat(
+                                fontSize: 30, fontWeight: FontWeight.w500)),
+                        TextSpan(
+                            text: ", ${contents.age}",
+                            style: GoogleFonts.montserrat(fontSize: 30))
+                      ]),
                   textAlign: TextAlign.left,
                 ),
               ),
@@ -109,16 +124,23 @@ class _SwipeableCardExampleState extends State<SwipeableCardExample> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Image.network(contents.imageUrl,
-                  height: constraints.maxWidth, width: constraints.maxWidth, fit: BoxFit.cover),
+                  height: constraints.maxWidth,
+                  width: constraints.maxWidth,
+                  fit: BoxFit.cover),
               Padding(
                 padding: const EdgeInsets.fromLTRB(5, 8.0, 5, 8.0),
                 child: RichText(
-                  text: TextSpan(style: DefaultTextStyle.of(context).style, children: [
-                    TextSpan(
-                        text: contents.name,
-                        style: GoogleFonts.montserrat(fontSize: 30, fontWeight: FontWeight.w500)),
-                    TextSpan(text: ", ${contents.age}", style: GoogleFonts.montserrat(fontSize: 30))
-                  ]),
+                  text: TextSpan(
+                      style: DefaultTextStyle.of(context).style,
+                      children: [
+                        TextSpan(
+                            text: contents.name,
+                            style: GoogleFonts.montserrat(
+                                fontSize: 30, fontWeight: FontWeight.w500)),
+                        TextSpan(
+                            text: ", ${contents.age}",
+                            style: GoogleFonts.montserrat(fontSize: 30))
+                      ]),
                   textAlign: TextAlign.left,
                 ),
               ),
