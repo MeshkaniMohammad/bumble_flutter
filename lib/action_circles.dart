@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bumble_flutter/swipe_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,13 +11,11 @@ class ActionCircles extends StatefulWidget {
 
 class _ActionCirclesState extends State<ActionCircles> {
   SwipeController swipeController;
-
-  final double _maxWidth = 120;
   final double _minWidth = 50;
   double _middle;
-  double _size = 0;
+  double _scale = 0;
   double _screenWidth;
-  double offset = 0;
+  double _offset = 0;
 
   @override
   void didChangeDependencies() {
@@ -28,13 +28,13 @@ class _ActionCirclesState extends State<ActionCircles> {
     swipeController = context.watch<SwipeController>();
     calculateOffset();
     return Transform.translate(
-      offset: Offset(offset, 0),
+      offset: Offset(_offset, 0),
       child: Stack(
         children: [
           Transform.translate(
             offset: Offset(_screenWidth, 0),
             child: Container(
-              width: _minWidth,
+              width: _minWidth + _scale,
               decoration: new BoxDecoration(
                 color: Colors.green,
                 shape: BoxShape.circle,
@@ -44,7 +44,7 @@ class _ActionCirclesState extends State<ActionCircles> {
           Transform.translate(
             offset: Offset(0 - _minWidth, 0),
             child: Container(
-              width: _minWidth,
+              width: _minWidth + _scale,
               decoration: new BoxDecoration(
                 color: Colors.red,
                 shape: BoxShape.circle,
@@ -58,10 +58,22 @@ class _ActionCirclesState extends State<ActionCircles> {
 
   void calculateOffset() {
     if (swipeController.dragState != DragState.UPDATE) {
-      offset = 0;
+      _offset = 0;
+      _scale = 0;
       return;
     }
 
-    offset = swipeController.dragStartOffset.dx - swipeController.dragUpdateOffset.dx;
+    //calculate and limit offset to middle of screen
+    _offset = max(
+      min(
+        swipeController.dragStartOffset.dx -
+            swipeController.dragUpdateOffset.dx,
+        _screenWidth / 2,
+      ),
+      -_screenWidth / 2 - _minWidth,
+    );
+
+    //calculate scale
+    _scale = _offset.abs() / 3;
   }
 }
