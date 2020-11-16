@@ -33,25 +33,45 @@ class _ActionCirclesState extends State<ActionCircles> {
         children: [
           Transform.translate(
             offset: Offset(_screenWidth, 0),
-            child: Container(
-              width: _minWidth + _scale,
-              decoration: new BoxDecoration(
-                color: Colors.white.withOpacity(0.5 + _opacity),
-                shape: BoxShape.circle,
-              ),
+            child: _buildItem(
+              color: Colors.yellow[700],
+              icon: Icons.done,
             ),
           ),
           Transform.translate(
             offset: Offset(0 - _minWidth, 0),
-            child: Container(
-              width: _minWidth + _scale,
-              decoration: new BoxDecoration(
-                color: Colors.white.withOpacity(0.5 + _opacity),
-                shape: BoxShape.circle,
-              ),
+            child: _buildItem(
+              color: Colors.grey[600],
+              icon: Icons.close,
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildItem({
+    @required Color color,
+    @required IconData icon,
+  }) {
+    return Container(
+      width: _minWidth + _scale,
+      decoration: new BoxDecoration(
+        color: Colors.white.withOpacity(0.5 + _opacity),
+        shape: BoxShape.circle,
+        border: Border.all(color: color, width: 6),
+      ),
+      child: Center(
+        child: FractionallySizedBox(
+          widthFactor: 0.6,
+          child: FittedBox(
+            fit: BoxFit.fill,
+            child: Icon(
+              icon,
+              color: color,
+            ),
+          ),
+        ),
       ),
     );
   }
