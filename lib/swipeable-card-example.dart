@@ -181,7 +181,7 @@ class _SwipeableCardExampleState extends State<SwipeableCardExample> {
       width: MediaQuery.of(context).size.width,
       child: Stack(
           children: cards
-              .map((int x) => SwipeableCard(
+              .map((int x) => SwappableCard(
                     key: Key("$x"),
                     child: _getCardContents(CARDS[x % CARDS.length]),
                     onDragStart: _prepareFutureCards(x),
